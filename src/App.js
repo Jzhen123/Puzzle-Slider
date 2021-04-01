@@ -8,29 +8,38 @@ class App extends React.Component {
     this.state = {
       tileArray: []
     }
+  
   }
 
   componentDidMount() {
     if (this.state.tileArray.length < 16) {
-      let arr = []
+      let arr = [];
       for (let i = 0; i < 16; i++) {
         arr.push({
-          currentPos: i,
-          winPos: i,
-          blank: false
+          currentPos: [Math.floor(i/4), i],
+          winPos: [Math.floor(i/4), i],
+          blank: false,
+          clickable: false
         })
       }
       this.setState({ tileArray: arr })
     }
   }
 
+  move = () => {
+    let tempArr = this.state.tileArray.map(arr => {return {...arr}})
 
+    tempArr[0].currentPos = this.state.tileArray[1].currentPos
+    tempArr[1].currentPos = this.state.tileArray[0].currentPos
+
+    this.setState({ tileArray: tempArr })
+  }
 
 
 
 
   render() {
-    {console.log(this.state.tileArray)}
+
     return (
       <>
         <div id="Board" className="container pt-5">
@@ -44,6 +53,7 @@ class App extends React.Component {
           }
           </div>
         </div>
+        <button onClick={this.move} type="button" className="btn btn-primary">Primary</button>
       </>
     )
   }

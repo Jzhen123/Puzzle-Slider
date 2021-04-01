@@ -1,7 +1,7 @@
 function Tile(props) {
     return (
         <div id="Tile" className="col-3 border square">
-            {props.pos}
+            {props.pos[0]}, {props.pos[1]}
         </div>
     )
 }

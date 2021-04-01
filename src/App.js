@@ -1,25 +1,52 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import Tile from './Tile'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tileArray: []
+    }
+  }
+
+  componentDidMount() {
+    if (this.state.tileArray.length < 16) {
+      let arr = []
+      for (let i = 0; i < 16; i++) {
+        arr.push({
+          currentPos: i,
+          winPos: i,
+          blank: false
+        })
+      }
+      this.setState({ tileArray: arr })
+    }
+  }
+
+
+
+
+
+
+  render() {
+    {console.log(this.state.tileArray)}
+    return (
+      <>
+        <div id="Board" className="container pt-5">
+          <div className="row">
+          {
+            this.state.tileArray.map((item, index) => {
+              return (
+                <Tile key={index} pos={item.currentPos} />
+              )
+            })
+          }
+          </div>
+        </div>
+      </>
+    )
+  }
+
 }
-
 export default App;

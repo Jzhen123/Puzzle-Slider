@@ -15,7 +15,18 @@ class App extends React.Component {
     if (this.state.tileArray.length < 16) {
       let arr = [];
       for (let i = 0; i < 16; i++) {
+        if (i === 0){
+          arr.push({
+            id: i,
+            currentPos: [Math.floor(i/4), i],
+            winPos: [Math.floor(i/4), i],
+            blank: true,
+            clickable: false
+          })
+          continue;
+        }
         arr.push({
+          id: i,
           currentPos: [Math.floor(i/4), i],
           winPos: [Math.floor(i/4), i],
           blank: false,
@@ -26,11 +37,16 @@ class App extends React.Component {
     }
   }
 
-  move = () => {
+  move = (tile) => {
+    console.log(tile)
     let tempArr = this.state.tileArray.map(arr => {return {...arr}})
+    let blank = tempArr.find(object => object.blank === true)
 
-    tempArr[0].currentPos = this.state.tileArray[1].currentPos
-    tempArr[1].currentPos = this.state.tileArray[0].currentPos
+    tempArr[tile.id].currentPos = this.state.tileArray[blank.id].currentPos
+    tempArr[blank.id].currentPos = this.state.tileArray[tile.id].currentPos
+
+    tempArr[tile.id].blank = this.state.tileArray[blank.id].blank
+    tempArr[blank.id].blank = this.state.tileArray[tile.id].blank
 
     this.setState({ tileArray: tempArr })
   }
@@ -39,6 +55,9 @@ class App extends React.Component {
 
 
   render() {
+    if (this.state.tileArray.length < 1) {
+      return null
+    }
 
     return (
       <>
@@ -47,7 +66,14 @@ class App extends React.Component {
           {
             this.state.tileArray.map((item, index) => {
               return (
-                <Tile key={index} pos={item.currentPos} />
+                <Tile 
+                  key={index} 
+                  pos={item.currentPos} 
+                  blank={item.blank} 
+                  move={this.move}
+                  item={item}
+                  // onClick={(tile) => this.move(item, tile)}
+                />
               )
             })
           }

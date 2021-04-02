@@ -8,3 +8,7 @@
   min-width: 500px;
   max-width: 500px;
 }
+
+h1 {
+  font-size: 10em;
+}

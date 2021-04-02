@@ -82,26 +82,21 @@ class App extends React.Component {
           return true
         }
         continue;
-      }
-      console.log('Havent Won')
-      return false;
+      } else return false;
+    }
+  }
+
+  shuffle = () => {
+    for (let i = 0; i < 50; i++) {
+      this.move(this.state.tileArray[(Math.floor(Math.random() * 16))])
     }
   }
 
   render() {
-    if (this.state.tileArray.length < 1) {
-      return null
-    }
     return (
       <>
-       
-          {this.win() ? 
-          <>
-          <div>You Win!</div>
-          </>
-           : ""}
-       
-        <div id="Board" className="container pt-5">
+        <div id="Board" className="container pt-5 pb-5 text-center">
+          {this.win() ? <h1>You Win!</h1> : ""}
           <div className="row">
             {
               this.state.tileArray.map((item, index) => {
@@ -116,11 +111,12 @@ class App extends React.Component {
                 )
               })
             }
+            <button type="button" onClick={this.shuffle} className="btn btn-primary">Shuffle</button>
           </div>
         </div>
+
       </>
     )
   }
-
 }
 export default App;

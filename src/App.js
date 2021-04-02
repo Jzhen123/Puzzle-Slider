@@ -34,23 +34,42 @@ class App extends React.Component {
         })
       }
       this.setState({ tileArray: arr })
+    
     }
   }
 
   move = (tile) => {
-    console.log(tile)
+    if (this.logic(tile) === true) {
+      console.log("Moved")
     let tempArr = this.state.tileArray.map(arr => {return {...arr}})
     let blank = tempArr.find(object => object.blank === true)
-
-    tempArr[tile.id].currentPos = this.state.tileArray[blank.id].currentPos
-    tempArr[blank.id].currentPos = this.state.tileArray[tile.id].currentPos
 
     tempArr[tile.id].blank = this.state.tileArray[blank.id].blank
     tempArr[blank.id].blank = this.state.tileArray[tile.id].blank
 
     this.setState({ tileArray: tempArr })
+    }
   }
 
+  logic(tile) {
+    let tempArr = this.state.tileArray.map(arr => {return {...arr}})
+    let blank = tempArr.find(object => object.blank === true)
+    
+      if (tile.currentPos[0] === blank.currentPos[0] && tile.currentPos[1] === blank.currentPos[1] + 1) {
+       return true
+      } else if (tile.currentPos[0] === blank.currentPos[0] && tile.currentPos[1] === blank.currentPos[1] - 1) {
+        return true
+      } else if (tile.currentPos[0] === blank.currentPos[0] - 1 && tile.currentPos[1] === blank.currentPos[1] - 4) {
+        return true
+      } else if (tile.currentPos[0] === blank.currentPos[0] - 1 && tile.currentPos[1] === blank.currentPos[1] + 4) {
+        return true
+      } else if (tile.currentPos[0] === blank.currentPos[0] + 1 && tile.currentPos[1] === blank.currentPos[1] - 4) {
+        return true
+      } else if (tile.currentPos[0] === blank.currentPos[0] + 1 && tile.currentPos[1] === blank.currentPos[1] + 4) {
+        return true
+      }
+      console.log("Can't Move")
+  }
 
 
 
@@ -58,8 +77,8 @@ class App extends React.Component {
     if (this.state.tileArray.length < 1) {
       return null
     }
-
     return (
+
       <>
         <div id="Board" className="container pt-5">
           <div className="row">
@@ -72,14 +91,12 @@ class App extends React.Component {
                   blank={item.blank} 
                   move={this.move}
                   item={item}
-                  // onClick={(tile) => this.move(item, tile)}
                 />
               )
             })
           }
           </div>
         </div>
-        <button onClick={this.move} type="button" className="btn btn-primary">Primary</button>
       </>
     )
   }

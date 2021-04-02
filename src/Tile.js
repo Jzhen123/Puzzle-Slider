@@ -6,8 +6,8 @@ function Tile(props) {
         )
     }
     return (
-        <div id="Tile" onClick={() => props.move(props.item)} className="col-3 border square">
-            {props.pos[0] + ', ' + props.pos[1]}
+        <div id="Tile" onClick={() => props.move(props.item)} className="col-3 border square text-center">
+            {props.pos[1]}
         </div>
     )
 }

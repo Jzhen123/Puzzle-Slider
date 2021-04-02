@@ -1,12 +1,12 @@
+import Earth from './Earth.jpg'
+
 function Tile(props) {
-    if (props.blank === true){
-        return (
-            <div className="col-3 border square" />
-        )
-    }
+    let top = -100 * Math.floor(props.item.id / 4)
+    let left = -100 * (props.item.id % 4)
     return (
-        <div id="Tile" onClick={() => props.move(props.item)} className="col-3 border square text-center">
-            {props.pos[1]}
+        // For Each Tile they have the same On Click and have a picture if they aren't the blank tile
+        <div id="Tile" onClick={() => props.move(props.item)} className="col-3 border square overflow-hidden position-relative">
+            {(!props.blank ? <img className="position-absolute" src={Earth} alt="Earth.jpg" style={{ top, left}}></img> : "" )}
         </div>
     )
 }

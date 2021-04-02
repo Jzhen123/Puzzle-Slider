@@ -8,8 +8,6 @@ class App extends React.Component {
     this.state = {
       tileArray: []
     }
-    this.won = false;
-
   }
 
   componentDidMount() {
@@ -37,7 +35,6 @@ class App extends React.Component {
         })
       }
       this.setState({ tileArray: arr })
-
     }
   }
 
@@ -98,8 +95,7 @@ class App extends React.Component {
         <div id="Board" className="container pt-5 pb-5 text-center">
           {this.win() ? <h1>You Win!</h1> : ""}
           <div className="row">
-            {
-              this.state.tileArray.map((item, index) => {
+            {this.state.tileArray.map((item, index) => {
                 return (
                   <Tile
                     key={index}
@@ -109,12 +105,10 @@ class App extends React.Component {
                     item={item}
                   />
                 )
-              })
-            }
+              })}
             <button type="button" onClick={this.shuffle} className="btn btn-primary">Shuffle</button>
           </div>
         </div>
-
       </>
     )
   }

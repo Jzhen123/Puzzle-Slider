@@ -67,16 +67,17 @@ Controller
 
 Functions 
 
-    setClickability - Should run on every click
-        find Tile that is blank
-        then save its current position
-        then using some math logic, set all Tiles that are "next" to the white tile clickable property to true and somehow set all the others to false
-
     move -
         Make temp array
         Switch the currentPos value with the blank tile in temp array
         Update clickablility values of the tiles using setClickability
         setState using the temp array
+
+    setClickability - Should run on every click
+        find Tile that is blank
+        then save its current position
+        then using some math logic, set all Tiles that are "next" to the white tile clickable property to true and somehow set all the others to false
+
 
     haveWeWon -
         If all objects currentPos == winPos

@@ -1,8 +1,7 @@
 function Tile(props) {
-
     if (props.blank === true){
         return (
-            <div id="Tile" className="col-3 border square" />
+            <div className="col-3 border square" />
         )
     }
     return (

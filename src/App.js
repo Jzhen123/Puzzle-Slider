@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
   logic(tile) {
-    let temp = [...this.state.tileArray]
+    let temp = [...this.state.tileArray];
     let blankIndex = temp.indexOf(0);
     let tileIndex = temp.indexOf(tile)
 
@@ -50,11 +50,15 @@ class App extends React.Component {
     return true
   }
 
-  shuffle = () => {
-    for (let i = 0; i < 10; i++) {
-      this.move(this.state.tileArray[(Math.floor(Math.random() * 15))])
-    }
-  }
+  // shuffle = () => {
+  //   let temp = [...this.state.tileArray];
+  //   for (let i = 0; i < 10; i++) {
+
+  //     temp[temp.indexOf(tile)] = 0
+  //     temp[this.state.tileArray.indexOf(0)] = tile
+  //     this.move(temp[(Math.floor(Math.random() * 15))])
+  //   }
+  // }
 
   render() {
     console.log(this.state.tileArray)
@@ -63,7 +67,7 @@ class App extends React.Component {
         <h1 className="text-center pt-4">Sliding Puzzle</h1>
         <div id="Board" className="container pt-3 pb-5 text-center">  {/* Board Container */}
           {this.win() ? <h2 className="p-1">You Win!</h2> : ""}
-          <div className="row">
+          <div className="row" style={{ height: "400px", width:"400px"}}>
             {this.state.tileArray.map((item, index) => {
               return (
                 <Tile
@@ -73,8 +77,8 @@ class App extends React.Component {
                 />
               )
             })}
-            <button type="button" onClick={this.shuffle} className="btn btn-primary">Shuffle</button>
           </div>
+            <button type="button" onClick={this.shuffle} className="btn btn-primary">Shuffle</button>
         </div>
       </>
     )

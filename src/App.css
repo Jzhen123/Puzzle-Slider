@@ -1,8 +1,4 @@
-.square:before{
-  content: "";
-  display: block;
-  padding-top: 100%;
-}
+
 
 #Board {
   min-width: 500px;
